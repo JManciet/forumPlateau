@@ -1,6 +1,6 @@
 <h1>Login</h1>
 
-<form method="POST" action="index.php?ctrl=login&action=connection">
+<form method="POST" action="index.php?ctrl=security&action=login">
     <input type="email" name="mail" placeholder="eMail" />
     <input type="password" name="mdp" placeholder="Mot de passe" />
     <br /><br />

@@ -35,13 +35,13 @@
                         if(App\Session::getUser()){
                             ?>
                             <a href="/security/viewProfile.html"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()->getPseudo()?></a>
-                            <a href="index.php?ctrl=logout">Déconnexion</a>
+                            <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
                             <?php
                         }
                         else{
                             ?>
-                            <a href="index.php?ctrl=login">Connexion</a>
-                            <a href="index.php?ctrl=register">Inscription</a>
+                            <a href="index.php?ctrl=security&action=login">Connexion</a>
+                            <a href="index.php?ctrl=security&action=addUser">Inscription</a>
                             <!-- <a href="/security/register.html">Inscription</a> -->
                             <a href="index.php?ctrl=forum&action=listTopic">la liste des topics</a>
                         <?php

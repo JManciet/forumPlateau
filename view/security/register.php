@@ -1,6 +1,6 @@
 <h1>register</h1>
 
-<form method="POST" action="index.php?ctrl=register&action=addUser">
+<form method="POST" action="index.php?ctrl=security&action=addUser">
 	            <table>
 	               <tr>
 	                  <td align="right">
