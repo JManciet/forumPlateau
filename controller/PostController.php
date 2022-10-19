@@ -26,11 +26,13 @@
         public function posts($id){
           
             $postManager = new PostManager();
- 
+            $topicManager = new TopicManager();
+
              return [
                  "view" => VIEW_DIR."forum/listPostsByTopic.php",
                  "data" => [
-                     "posts" => $postManager->findAllById("topic", $id)
+                     "posts" => $postManager->findAllById("topic", $id),
+                     "topic" => $topicManager->findOneById($id)
                  ]
              ];
          
@@ -38,7 +40,6 @@
 
 
          public function addPost($id){
-
 
             if(isset($_POST['submit'])){
 
@@ -53,15 +54,14 @@
                     $postManager->add($data);
 
                     Session::addFlash('success', 'Le message a bien été posté !');
-
-                    $this->redirectTo("post", "posts", $id);
                     
                 }else{
 
                     Session::addFlash('error', 'Echec lors de la validation ! Erreur dans l\'un des champs.');
     
-                    $this->redirectTo("post", "posts", $id);
                 }
+
+                $this->redirectTo("post", "posts", $id);
         
             }
          

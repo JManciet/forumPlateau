@@ -24,7 +24,7 @@
                     SET closed = :closed
                     WHERE id_topic = :id";
 
-            DAO::update($sql, ['closed' => $closed],['id' => $id]);
+            DAO::update($sql, ['closed' => $closed ,'id' => $id]);
             
         }
 

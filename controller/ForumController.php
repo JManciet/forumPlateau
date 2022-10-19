@@ -58,16 +58,14 @@
                     $postManager->add($dataPost);
 
                     Session::addFlash('success', 'Le topic a bien été créé !');
-
-                    $this->redirectTo("forum", "listTopic");
                     
                 }else{
 
                     Session::addFlash('error', 'Echec lors de la validation ! Erreur dans l\'un des champs.');
-
-                    $this->redirectTo("forum", "listTopic");
     
                 }
+
+                $this->redirectTo("forum");
         
             }
          
@@ -76,24 +74,34 @@
 
          public function toggClosed($id){
 
+            $topicManager = new TopicManager();
 
-            if($id == Session::getUser()->getId()){
+            $topic = $topicManager->findOneById($id);
 
-                $topicManager = new TopicManager();
-
-                $topic = $topicManager->findOneById($id);
+            if($topic->getUser()->getId() == Session::getUser()->getId()){
 
                 if($topic->getClosed()){
 
                     $topicManager->updateClosed($id,0);
 
                 }else{
-
+                    
                     $topicManager->updateClosed($id,1);
 
                 }
 
             }
+
+            switch ($_GET['from']) {
+                case 'posts':
+                    $this->redirectTo("post", "posts", $id);
+                    break;
+                
+                case 'forum':
+                    $this->redirectTo("forum");
+                    break;
+            }
+            
 
 
          }

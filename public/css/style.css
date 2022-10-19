@@ -1,0 +1,12 @@
+.lock{
+    color: white;
+    text-decoration: none;
+}
+
+.fa-lock-open{
+    color: green;
+}
+
+.fa-lock{
+    color: red;
+}

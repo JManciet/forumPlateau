@@ -8,7 +8,7 @@ $topics = $result["data"]['topics'];
 foreach($topics as $topic ){
     ?>
     <p>
-    <div><a href="index.php?ctrl=post&action=posts&id=<?=$topic->getId()?>"><?=$topic->getTitle()?></a></div>
+    <div><a href="index.php?ctrl=post&action=posts&id=<?=$topic->getId()?>"><?=$topic->getTitle()?></a> <?php echo ($topic->getClosed() ?'<i class="fa-solid fa-lock"></i>' :'<i class="fa-solid fa-lock-open"></i>') ?></div>
     <div><?=$topic->getCreationdate()?></div>
     <div>Nombre de reponse ??</div>
     <div><?php
@@ -16,9 +16,9 @@ foreach($topics as $topic ){
     if($topic->getUser()->getId() == App\Session::getUser()->getId()){
 
         if($topic->getClosed()){
-            echo "<a href='index.php?ctrl=forum&action=toggClosed&id=".$topic->getId()."'>Dévérouiller le topic</a>";
+            echo "<span class='badge text-bg-success'><a class='lock' href='index.php?ctrl=forum&action=toggClosed&id=".$topic->getId()."&from=forum'>Dévérouiller le topic</a></span>";
         }else{
-            echo "<a href='index.php?ctrl=forum&action=toggClosed&id=".$topic->getId()."'>Vérouiller le topic</a>";
+            echo "<span class='badge text-bg-danger'><a class='lock' href='index.php?ctrl=forum&action=toggClosed&id=".$topic->getId()."&from=forum'>Vérouiller le topic</a></span>";
         }
 
     }
