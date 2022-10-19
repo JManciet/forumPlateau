@@ -1,19 +1,31 @@
 <?php
-
 $topics = $result["data"]['topics'];
-    
 ?>
 
 <h1>liste topics</h1>
 
 <?php
 foreach($topics as $topic ){
-
     ?>
     <p>
     <div><a href="index.php?ctrl=post&action=posts&id=<?=$topic->getId()?>"><?=$topic->getTitle()?></a></div>
     <div><?=$topic->getCreationdate()?></div>
     <div>Nombre de reponse ??</div>
+    <div><?php
+
+    if($topic->getUser()->getId() == App\Session::getUser()->getId()){
+
+        if($topic->getClosed()){
+            echo "<a href='index.php?ctrl=forum&action=toggClosed&id=".$topic->getId()."'>Dévérouiller le topic</a>";
+        }else{
+            echo "<a href='index.php?ctrl=forum&action=toggClosed&id=".$topic->getId()."'>Vérouiller le topic</a>";
+        }
+
+    }
+     
+     ?>
+
+    </div>
     </p>
     <?php
 

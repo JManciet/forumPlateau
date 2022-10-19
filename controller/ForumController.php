@@ -14,12 +14,22 @@
           
            $topicManager = new TopicManager();
 
-            return [
-                "view" => VIEW_DIR."forum/listTopics.php",
-                "data" => [
-                    "topics" => $topicManager->findAll(["creationdate", "DESC"])
-                ]
-            ];
+
+           if(Session::getUser())
+
+                return [
+                    "view" => VIEW_DIR."forum/listTopics.php",
+                    "data" => [
+                        "topics" => $topicManager->findAll(["creationdate", "DESC"])
+                    ]
+                ];
+
+            else
+
+                return [
+                    "view" => VIEW_DIR."home.php"
+                ];
+                
         
         }
 
@@ -35,13 +45,13 @@
 
                 if($text && $title){
 
-                    $dataTopic=['title' => $title, 'user_id' => 1];
+                    $dataTopic=['title' => $title, 'user_id' => Session::getUser()->getId()];
 
                     $topicManager = new TopicManager();
 
                     $lastInsertId = $topicManager->add($dataTopic);
 
-                    $dataPost =['text' => $text, 'user_id' => 1, 'topic_id' => $lastInsertId];
+                    $dataPost =['text' => $text, 'user_id' => Session::getUser()->getId(), 'topic_id' => $lastInsertId];
 
                     $postManager = new PostManager();
 
@@ -63,6 +73,30 @@
          
          }
 
+
+         public function toggClosed($id){
+
+
+            if($id == Session::getUser()->getId()){
+
+                $topicManager = new TopicManager();
+
+                $topic = $topicManager->findOneById($id);
+
+                if($topic->getClosed()){
+
+                    $topicManager->updateClosed($id,0);
+
+                }else{
+
+                    $topicManager->updateClosed($id,1);
+
+                }
+
+            }
+
+
+         }
         
 
     }

@@ -17,4 +17,15 @@
 
         
 
+
+        public function updateClosed($id,$closed){
+
+            $sql = "UPDATE ".$this->tableName."
+                    SET closed = :closed
+                    WHERE id_topic = :id";
+
+            DAO::update($sql, ['closed' => $closed],['id' => $id]);
+            
+        }
+
     }

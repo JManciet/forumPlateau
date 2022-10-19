@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tiny.cloud/1/zg3mwraazn1b2ezih16je1tc6z7gwp5yd4pod06ae5uai8pa/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
     <link rel="stylesheet" href="<?= PUBLIC_DIR ?>/css/style.css">
     <title>FORUM</title>
@@ -23,7 +24,7 @@
                         <?php
                         if(App\Session::isAdmin()){
                             ?>
-                            <a href="index.php?ctrl=home&action=users">Voir la liste des gens</a>
+                            <a href="index.php?ctrl=home&action=users">Voir la liste des utilisateurs</a>
                           
                             <?php
                         }
@@ -36,6 +37,7 @@
                             ?>
                             <a href="index.php?ctrl=security&action=profil&id=<?= App\Session::getUser()->getId() ?>"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()->getPseudo()?></a>
                             <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
+                            <a href="index.php?ctrl=forum&action=listTopic">Voir la liste des topics</a>
                             <?php
                         }
                         else{
@@ -43,11 +45,9 @@
                             <a href="index.php?ctrl=security&action=login">Connexion</a>
                             <a href="index.php?ctrl=security&action=addUser">Inscription</a>
                             <!-- <a href="/security/register.html">Inscription</a> -->
-                            <a href="index.php?ctrl=forum&action=listTopic">la liste des topics</a>
                         <?php
                         }
                    
-                        
                     ?>
                     </div>
                 </nav>
@@ -58,7 +58,7 @@
             </main>
         </div>
         <footer>
-            <p>&copy; 2020 - Forum CDA - <a href="/home/forumRules.html">Règlement du forum</a> - <a href="">Mentions légales</a></p>
+            <p>&copy; 2020 - Forum CDA - <a href="index.php?ctrl=home&action=forumRules">Règlement du forum</a> - <a href="">Mentions légales</a></p>
             <!--<button id="ajaxbtn">Surprise en Ajax !</button> -> cliqué <span id="nbajax">0</span> fois-->
         </footer>
     </div>

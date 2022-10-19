@@ -48,7 +48,7 @@
 
                     $postManager = new PostManager();
 
-                    $data=['text' => $text, 'user_id' => 1, 'topic_id' => $id];
+                    $data=['text' => $text, 'user_id' => Session::getUser()->getId(), 'topic_id' => $id];
 
                     $postManager->add($data);
 
