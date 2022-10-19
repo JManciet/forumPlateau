@@ -147,4 +147,18 @@
         }
 
 
+        public function profil($id){
+          
+            $userManager = new UserManager();
+ 
+             return [
+                 "view" => VIEW_DIR."security/viewProfile.php",
+                 "data" => [
+                     "user" => $userManager->findOneById($id)
+                 ]
+             ];
+         
+         }
+
+
     }

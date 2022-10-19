@@ -11,7 +11,7 @@
         private $mdp;
         private $pseudo;
         private $avatar;
-        private $inscriptionDate;
+        private $registerdate;
         
 
         public function __construct($data){         
@@ -141,13 +141,13 @@
         }
 
 
-        public function getInscriptionDate(){
-            $formattedDate = $this->inscriptionDate->format("d/m/Y, H:i:s");
+        public function getRegisterdate(){
+            $formattedDate = $this->registerdate->format("d/m/Y, H:i:s");
             return $formattedDate;
         }
 
-        public function setInscriptionDate($date){
-            $this->inscriptionDate = new \DateTime($date);
+        public function setRegisterdate($date){
+            $this->registerdate = new \DateTime($date);
             return $this;
         }
 

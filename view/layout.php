@@ -19,7 +19,7 @@
             <header>
                 <nav>
                     <div id="nav-left">
-                        <a href="/">Accueil</a>
+                        <a href="./">Accueil</a>
                         <?php
                         if(App\Session::isAdmin()){
                             ?>
@@ -34,7 +34,7 @@
                         
                         if(App\Session::getUser()){
                             ?>
-                            <a href="/security/viewProfile.html"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()->getPseudo()?></a>
+                            <a href="index.php?ctrl=security&action=profil&id=<?= App\Session::getUser()->getId() ?>"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()->getPseudo()?></a>
                             <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
                             <?php
                         }
