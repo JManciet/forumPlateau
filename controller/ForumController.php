@@ -34,6 +34,52 @@
         }
 
 
+        public function posts($id){
+          
+            $postManager = new PostManager();
+            $topicManager = new TopicManager();
+
+             return [
+                 "view" => VIEW_DIR."forum/listPostsByTopic.php",
+                 "data" => [
+                     "posts" => $postManager->findAllById("topic", $id),
+                     "topic" => $topicManager->findOneById($id)
+                 ]
+             ];
+         
+         }
+
+
+         public function addPost($id){
+
+            if(isset($_POST['submit'])){
+
+                $text = filter_input(INPUT_POST, "text", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if($text){
+
+                    $postManager = new PostManager();
+
+                    $data=['text' => $text, 'user_id' => Session::getUser()->getId(), 'topic_id' => $id];
+
+                    $postManager->add($data);
+
+                    Session::addFlash('success', 'Le message a bien été posté !');
+                    
+                }else{
+
+                    Session::addFlash('error', 'Echec lors de la validation ! Erreur dans l\'un des champs.');
+    
+                }
+
+                $this->redirectTo("forum", "posts", $id);
+        
+            }
+         
+         }
+
+
+
         public function addTopic(){
 
 

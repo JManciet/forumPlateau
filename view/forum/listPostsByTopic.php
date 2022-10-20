@@ -40,7 +40,7 @@ if(!$topic->getClosed()){
 
 <h2>Creer un nouveau post</h2>
 
-<form method="POST" action="index.php?ctrl=post&action=addPost&id=<?=$_GET['id']?>">
+<form method="POST" action="index.php?ctrl=forum&action=addPost&id=<?=$_GET['id']?>">
     <table>
         <tr>
             <td align="right">

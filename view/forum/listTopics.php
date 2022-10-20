@@ -8,7 +8,7 @@ $topics = $result["data"]['topics'];
 foreach($topics as $topic ){
     ?>
     <p>
-    <div><a href="index.php?ctrl=post&action=posts&id=<?=$topic->getId()?>"><?=$topic->getTitle()?></a> <?php echo ($topic->getClosed() ?'<i class="fa-solid fa-lock"></i>' :'<i class="fa-solid fa-lock-open"></i>') ?></div>
+    <div><a href="index.php?ctrl=forum&action=posts&id=<?=$topic->getId()?>"><?=$topic->getTitle()?></a> <?php echo ($topic->getClosed() ?'<i class="fa-solid fa-lock"></i>' :'<i class="fa-solid fa-lock-open"></i>') ?></div>
     <div><?=$topic->getCreationdate()?></div>
     <div>Nombre de reponse ??</div>
     <div><?php
