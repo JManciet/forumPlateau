@@ -28,4 +28,14 @@
             
         }
 
+        public function nbrPostByTopic($id){
+
+            $sql = "SELECT topic_id , COUNT(topic_id) AS nbrmessage
+            FROM post
+            WHERE topic_id = :id
+                    ";
+
+            return  DAO::select($sql, ["id" => $id], false);
+        }
+
     }

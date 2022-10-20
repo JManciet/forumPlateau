@@ -1,5 +1,8 @@
 <?php
+
+use Model\Managers\TopicManager;
 $topics = $result["data"]['topics'];
+
 ?>
 
 <h1>liste topics</h1>
@@ -10,7 +13,11 @@ foreach($topics as $topic ){
     <p>
     <div><a href="index.php?ctrl=forum&action=posts&id=<?=$topic->getId()?>"><?=$topic->getTitle()?></a> <?php echo ($topic->getClosed() ?'<i class="fa-solid fa-lock"></i>' :'<i class="fa-solid fa-lock-open"></i>') ?></div>
     <div><?=$topic->getCreationdate()?></div>
-    <div>Nombre de reponse ??</div>
+    <div>Nombre de reponse : <?php 
+    $topicManager = new TopicManager(); 
+    echo $topicManager->nbrPostByTopic($topic->getId())["nbrmessage"];;
+    ?>
+    </div>
     <div><?php
 
     if($topic->getUser()->getId() == App\Session::getUser()->getId()){
