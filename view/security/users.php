@@ -15,6 +15,7 @@ $users = $result["data"]['users'];
             <th>ROLE</th>
             <th>EMAIL</th>
             <th>DATE D'INSCRIPTION</th>
+            <th>BANNISSEMENT</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,16 @@ $users = $result["data"]['users'];
                     <td><?= $user->getRole() ?></td>
                     <td><?= $user->getEmail() ?></td>
                     <td><?= $user->getRegisterdate() ?></td>
+                    <td>
+                        <?php 
+                        if($user->getRole()!="ROLE_ADMIN"){ ?>
+                        <form action="" method="get">
+                            <input type="date" name="banneduntil" id="banneduntil">
+                            <input type="submit" value="valider">
+                        </form>
+
+                        <?php }?>
+                    </td>
                 </tr>
 
         <?php } ?>

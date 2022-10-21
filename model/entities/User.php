@@ -12,6 +12,7 @@
         private $pseudo;
         private $avatar;
         private $registerdate;
+        private $banneduntil;
         
 
         public function __construct($data){         
@@ -152,6 +153,19 @@
         }
 
 
+        public function getBanneduntil()
+        {
+                $formattedDate = $this->banneduntil->format("d/m/Y, H:i:s");
+            return $formattedDate;
+        }
+
+        
+        public function setBanneduntil($banneduntil)
+        {
+                $this->banneduntil = new \DateTime($banneduntil);
+                return $this;
+        }
+
 
         public function hasRole($role){
                 
@@ -162,4 +176,5 @@
                 }
                 
         }
+
     }
