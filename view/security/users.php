@@ -5,7 +5,7 @@ $users = $result["data"]['users'];
 ?>
 
 
-<h1>Liste utilisateurs</h1>
+<h1>Liste des utilisateurs</h1>
 
 
 <table class='table table-striped'>
