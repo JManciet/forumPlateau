@@ -19,6 +19,52 @@
         }
             
 
+
+        public function users(){
+
+            $this->restrictTo("ROLE_USER");
+
+            $manager = new UserManager();
+            $users = $manager->findAll(['registerdate', 'DESC']);
+
+            return [
+                "view" => VIEW_DIR."security/users.php",
+                "data" => [
+                    "users" => $users
+                ]
+            ];
+        }
+
+
+        public function bannUser($id){
+
+        
+
+            if(isset($_POST['submit'])) {
+
+
+
+                $days = filter_input(INPUT_POST, "bannedUntil", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+               
+
+                if($days){
+
+                    $userManager = new UserManager();
+                    $userManager->bann($id,$days);
+
+                    $this->redirectTo("security","users");
+
+                }
+
+
+            }
+
+
+
+        }
+
+
         public function addUser($id){
 
 

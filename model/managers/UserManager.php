@@ -16,6 +16,21 @@
         }
 
 
+        public function bann($id, $days){
+
+            $sql = "UPDATE ".$this->tableName."
+                    SET banneduntil = DATE_ADD(NOW(), INTERVAL :days DAY)
+                    WHERE id_user = :id";
+
+            
+                DAO::update($sql, ['id' => $id,
+                                   'days' => $days]); 
+                
+        
+        }
+
+
+
         public function findEmail($email){
 
             $sql = "SELECT *

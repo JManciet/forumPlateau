@@ -29,9 +29,12 @@ $users = $result["data"]['users'];
                     <td>
                         <?php 
                         if($user->getRole()!="ROLE_ADMIN"){ ?>
-                        <form action="" method="get">
-                            <input type="date" name="banneduntil" id="banneduntil">
-                            <input type="submit" value="valider">
+
+                        <a href="#" onclick = "togg(<?= $user->getId() ?>)">Bannir ce membre ?</a>
+
+                        <form class="formAddBan" id='<?= $user->getId() ?>' action="index.php?ctrl=security&action=bannUser&id=<?= $user->getId() ?>" method="post">
+                            Pour une durrée de <input type="number" name="bannedUntil" id="bannedUntil"> jours.
+                            <input type="submit" name="submit" value="valider">
                         </form>
 
                         <?php }?>

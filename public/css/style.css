@@ -24,3 +24,7 @@
 .fa-lock{
     color: red;
 }
+
+.formAddBan{
+    display: none;
+}
