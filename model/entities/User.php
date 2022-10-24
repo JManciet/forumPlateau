@@ -13,6 +13,7 @@
         private $avatar;
         private $registerdate;
         private $banneduntil;
+        private $timeBannedRemaining;
         
 
         public function __construct($data){         
@@ -154,16 +155,28 @@
 
 
         public function getBanneduntil()
-        {
+        {       
+             if(is_null($this->banneduntil)) {
+                return null;
+             } else {
                 $formattedDate = $this->banneduntil->format("d/m/Y, H:i:s");
-            return $formattedDate;
+                return $formattedDate;
+
+             }
+
+               
         }
 
         
         public function setBanneduntil($banneduntil)
         {
-                $this->banneduntil = new \DateTime($banneduntil);
-                return $this;
+                if(is_null($banneduntil)) {
+                        $this->banneduntil = NULL;
+                } else {
+                        $this->banneduntil = new \DateTime($banneduntil);
+                        return $this;
+
+                }
         }
 
 
@@ -177,4 +190,30 @@
                 
         }
 
+
+        
+        public function getTimeBannedRemaining()
+        {
+                return $this->timeBannedRemaining;
+        }
+
+        
+        public function setTimeBannedRemaining($timeBannedRemaining)
+        {
+                $this->timeBannedRemaining = $this->secondsToTime($timeBannedRemaining);
+
+                return $this;
+        }
+
+        private function secondsToTime($seconds) {
+
+                if(!is_null($seconds)){
+                        $dtF = new \DateTime('@0');
+                        $dtT = new \DateTime("@$seconds");
+                        return $dtF->diff($dtT)->format('Il reste %a days, %h hours and %i minutes');
+                }else{
+
+                        return null;
+                }
+            }
     }

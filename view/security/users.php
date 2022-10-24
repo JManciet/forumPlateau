@@ -20,7 +20,9 @@ $users = $result["data"]['users'];
     </thead>
     <tbody>
         <?php
-            foreach($users as  $user) { ?>
+            foreach($users as  $user) { 
+                
+                ?>
                 <tr>
                     <td><?= $user->getPseudo() ?></td>
                     <td><?= $user->getRole() ?></td>
@@ -28,16 +30,32 @@ $users = $result["data"]['users'];
                     <td><?= $user->getRegisterdate() ?></td>
                     <td>
                         <?php 
-                        if($user->getRole()!="ROLE_ADMIN"){ ?>
+                        if($user->getRole()!="ROLE_ADMIN"){ 
+                            if(is_null($user->getBanneduntil())){?>
 
-                        <a href="#" onclick = "togg(<?= $user->getId() ?>)">Bannir ce membre ?</a>
+                                <a href="#" onclick = "togg(<?= $user->getId() ?>)">Bannir ce membre ?</a>
 
-                        <form class="formAddBan" id='<?= $user->getId() ?>' action="index.php?ctrl=security&action=bannUser&id=<?= $user->getId() ?>" method="post">
-                            Pour une durrée de <input type="number" name="bannedUntil" id="bannedUntil"> jours.
-                            <input type="submit" name="submit" value="valider">
-                        </form>
+                                <form class="formAddBan" id='<?= $user->getId() ?>' action="index.php?ctrl=security&action=bannUser&id=<?= $user->getId() ?>" method="post">
+                                    Pour une durrée de <input type="number" name="bannedUntil" id="bannedUntil"> jours.
+                                    <input type="submit" name="submit" value="valider">
+                                </form>
 
-                        <?php }?>
+                        <?php 
+                            } else{
+                                
+                              
+                                ?>
+
+
+                                <span><?= $user->getTimeBannedRemaining() ?></span>
+                                <a href="index.php?ctrl=security&action=cancelBannUser&id=<?= $user->getId() ?>" >Annuler bannissement</a>
+
+
+
+                        <?php
+
+                            }
+                        }?>
                     </td>
                 </tr>
 

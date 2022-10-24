@@ -19,13 +19,15 @@
         }
             
 
+        
+
 
         public function users(){
 
             $this->restrictTo("ROLE_USER");
 
             $manager = new UserManager();
-            $users = $manager->findAll(['registerdate', 'DESC']);
+            $users = $manager->findAllUsers(['registerdate', 'DESC']);
 
             return [
                 "view" => VIEW_DIR."security/users.php",
@@ -59,6 +61,20 @@
 
 
             }
+
+
+
+        }
+
+        public function cancelBannUser($id){
+
+        
+
+                    $userManager = new UserManager();
+                    $userManager->cancelBann($id);
+
+                    $this->redirectTo("security","users");
+
 
 
 
