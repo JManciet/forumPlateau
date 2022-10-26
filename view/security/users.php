@@ -46,8 +46,7 @@ $users = $result["data"]['users'];
                               
                                 ?>
 
-
-                                <span><?= $user->getTimeBannedRemaining() ?></span>
+                                <span>Banni encore <?= $user->getTimeBannedRemaining() ?></span>
                                 <a href="index.php?ctrl=security&action=cancelBannUser&id=<?= $user->getId() ?>" >Annuler bannissement</a>
 
 

@@ -200,9 +200,17 @@
         
         public function setTimeBannedRemaining($timeBannedRemaining)
         {
-                $this->timeBannedRemaining = $this->secondsToTime($timeBannedRemaining);
 
-                return $this;
+                if($timeBannedRemaining<0){
+
+                        $this->setBanneduntil(null);   
+
+                }else{
+
+                        $this->timeBannedRemaining = $this->secondsToTime($timeBannedRemaining);
+
+                }
+                
         }
 
         private function secondsToTime($seconds) {
@@ -210,7 +218,7 @@
                 if(!is_null($seconds)){
                         $dtF = new \DateTime('@0');
                         $dtT = new \DateTime("@$seconds");
-                        return $dtF->diff($dtT)->format('Il reste %a days, %h hours and %i minutes');
+                        return $dtF->diff($dtT)->format('%a jours, %h heures et %i minutes');
                 }else{
 
                         return null;

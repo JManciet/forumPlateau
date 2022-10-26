@@ -168,11 +168,15 @@
 
                         if(password_verify($mdp, $hashMdp)){
 
-                            Session::setUser($user);
 
-                            Session::addFlash('success', 'Connection établie !');
-                            $this->redirectTo("home");
+                            if(is_null($user->getBanneduntil())){
+                                Session::setUser($user);
 
+                                Session::addFlash('success', 'Connection établie !');
+                                $this->redirectTo("home");
+                            } else {
+                                Session::addFlash('error', 'Désolé vous avez été banni ! Revenez dans '.$user->getTimeBannedRemaining());
+                            }
                         } else {
                             Session::addFlash('error', 'Mauvais mot de passe !');
                         }

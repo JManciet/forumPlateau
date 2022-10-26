@@ -104,7 +104,7 @@
 
         public function findUserByEmail($email){
 
-            $sql = "SELECT *
+            $sql = "SELECT *, TIMESTAMPDIFF(SECOND, NOW(), banneduntil) timeBannedRemaining
                     FROM ".$this->tableName." a
                     WHERE a.email = :email
                     ";
