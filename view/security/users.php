@@ -4,9 +4,9 @@ $users = $result["data"]['users'];
     
 ?>
 
-
-<h1>Liste des utilisateurs</h1>
-
+<div id="mainTitle">
+    <h1>Liste des utilisateurs</h1>
+</div>
 
 <table class='table table-striped'>
     <thead>

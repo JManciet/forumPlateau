@@ -4,8 +4,8 @@ $topics = $result["data"]['topics'];
 
 ?>
 
-<div id="titreTopics">
-    <h1>liste topics</h1>
+<div id="mainTitle">
+    <h1>liste des topics</h1>
 </div>
 
 <?php
@@ -45,31 +45,21 @@ foreach($topics as $topic ){
 <h2>Creer un nouveau topic</h2>
 
 <form method="POST" action="index.php?ctrl=forum&action=addTopic">
-    <table>
-        <tr>
-            <td align="right">
-                <label for="title">Titre :</label>
-            </td>
-            <td>
-                <input type="text" placeholder="Votre titre" id="title" name="title" />
-            </td>
-        </tr>
-        <tr>
-            <td align="right">
-                <label for="text">Texte :</label>
-            </td>
-            <td>
-                <textarea name="text" id="text"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td align="center">
-                <br />
-                <input type="submit" name="submit" value="Valider" />
-            </td>
-        </tr>
-    </table>
+    
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Titre</span>
+        <input type="text" id="title" name="title" class="form-control" placeholder="Votre titre" aria-label="Votre titre" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Votre texte</span>
+        <textarea class="form-control" aria-label="Votre texte" name="text" id="text"></textarea>
+    </div>
+    <br>
+    <div class="col-12">
+        <button class="btn btn-primary" name="submit" type="submit">Valider</button>
+    </div>
+    <br>
+            
 </form>
 
 

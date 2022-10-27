@@ -5,15 +5,23 @@ $topic = $result["data"]['topic'];
 
 ?>
 
-<h1>liste posts <?php echo ($topic->getClosed() ?'<i class="fa-solid fa-lock"></i>' :'<i class="fa-solid fa-lock-open"></i>') ?></h1>
+<div id="mainTitle">
+    <h1>liste posts <?php echo ($topic->getClosed() ?'<i class="fa-solid fa-lock"></i>' :'<i class="fa-solid fa-lock-open"></i>') ?></h1>
+</div>
+
+<div id="postTitle">
+    <h2><?= $topic->getTitle() ?></h2>
+</div>
 
 <?php
 if($posts!=null)
 
     foreach($posts as $post){
         ?>
-        <strong>Par <?=$post->getPseudo()?></strong> le <?=$post->getDatePost()?>
-        <p><?=$post->getText()?></p>
+        <div class="postContainer">
+            <strong>Par <?=$post->getPseudo()?></strong> le <?=$post->getDatePost()?>
+            <p><?=$post->getText()?></p>
+        </div>
         <?php
     }
  else {
@@ -42,23 +50,15 @@ if(!$topic->getClosed()){
 <h2>Creer un nouveau post</h2>
 
 <form method="POST" action="index.php?ctrl=forum&action=addPost&id=<?=$_GET['id']?>">
-    <table>
-        <tr>
-            <td align="right">
-                <label for="text">Texte :</label>
-            </td>
-            <td>
-                <textarea name="text" id="text"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td align="center">
-                <br />
-                <input type="submit" name="submit" value="Valider" />
-            </td>
-        </tr>
-    </table>
+    <div class="input-group">
+        <span class="input-group-text">Votre texte</span>
+        <textarea class="form-control" aria-label="Votre texte" name="text" id="text"></textarea>
+    </div>
+    <br>
+    <div class="col-12">
+        <button class="btn btn-primary" name="submit" type="submit">Valider</button>
+    </div>
+    <br>
 </form>
 
 

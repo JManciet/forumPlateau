@@ -8,10 +8,11 @@
 
 
 body{
-    background: azure;
+    background: rgb(215, 255, 255);
 }
 
 #wrapper{
+    background: white;
     width: 50%;
     min-width: 400px;
     margin: 0 auto;
@@ -19,6 +20,7 @@ body{
     flex-direction: column;
     align-items: stretch;
     justify-content:center;
+    padding: 0 25px;
 }
 
 a{
@@ -43,11 +45,10 @@ a{
     display: none;
 }
 
-#titreTopics{
-
+#mainTitle{
     border-radius: 10px;
     color: white;
-    background-color: rgb(118, 83, 223);
+    background-color: rgb(110, 165, 192);
     text-align: center;
 }
 
@@ -56,7 +57,9 @@ a{
     cursor: pointer;
     background: white;
     border: 1px solid rgb(175, 175, 175);
-    border-radius: 5px;
+    border-radius: 10px;
+    padding: 10px;
+
 
 }
 
@@ -65,10 +68,12 @@ a{
 }
 
 .topicTitle{
-    background-color: rgb(192, 192, 192);
+    background-color: rgb(143, 176, 192);
     display: flex;
     align-items: stretch;
     justify-content: space-between;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .topicNbrPost{
@@ -76,5 +81,21 @@ a{
     display: flex;
     align-items: stretch;
     justify-content: space-between;
+
+}
+
+.postContainer{
+
+    background: white;
+    border: 1px solid rgb(175, 175, 175);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+
+}
+
+#postTitle{
+
+    text-align: center;
 
 }

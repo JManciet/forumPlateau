@@ -5,5 +5,7 @@ $user = $result["data"]['user'];
     
 ?>
 
-<h1>Profil utilisateur</h1>
+<div id="mainTitle">
+    <h1>Profil utilisateur</h1>
+</div>
 
