@@ -16,6 +16,27 @@
         }
 
 
+        public function findUser($id){
+
+
+            $sql = "
+            SELECT 
+            u.*,
+            COUNT(DISTINCT p.id_post) nbPosts,
+            COUNT(DISTINCT t.id_topic) nbTopics   
+            FROM user u
+            LEFT JOIN post p ON p.user_id = u.id_user
+            LEFT JOIN topic t ON t.user_id = u.id_user
+            WHERE u.id_user= :id
+            ";
+
+            return $this->getOneOrNullResult(
+                DAO::select($sql, ['id' => $id], false), 
+                $this->className
+            );
+
+
+        }
         
         public function findAllUsers($order = null){
 

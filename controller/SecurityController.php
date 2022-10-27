@@ -218,7 +218,7 @@
             $userManager = new UserManager();
  
              return [
-                 "view" => VIEW_DIR."security/viewProfile.php",
+                 "view" => VIEW_DIR."security/viewAccount.php",
                  "data" => [
                      "user" => $userManager->findOneById($id)
                  ]

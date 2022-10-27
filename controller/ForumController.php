@@ -7,6 +7,7 @@
     use App\ControllerInterface;
     use Model\Managers\TopicManager;
     use Model\Managers\PostManager;
+    use Model\Managers\UserManager;
     
     class ForumController extends AbstractController implements ControllerInterface{
 
@@ -34,6 +35,20 @@
         }
 
 
+        public function user($id){
+          
+            $userManager = new UserManager();
+
+             return [
+                 "view" => VIEW_DIR."forum/viewProfile.php",
+                 "data" => [
+                     "user" => $userManager->findUser($id),
+                 ]
+             ];
+         
+         }
+
+
         public function posts($id){
           
             $postManager = new PostManager();
@@ -48,6 +63,9 @@
              ];
          
          }
+
+
+
 
 
          public function addPost($id){

@@ -24,7 +24,7 @@ $users = $result["data"]['users'];
                 
                 ?>
                 <tr>
-                    <td><?= $user->getPseudo() ?></td>
+                    <td><a href="index.php?ctrl=forum&action=user&id=<?=$user->getId()?>"><?= $user->getPseudo() ?></a></td>
                     <td><?= $user->getRole() ?></td>
                     <td><?= $user->getEmail() ?></td>
                     <td><?= $user->getRegisterdate() ?></td>

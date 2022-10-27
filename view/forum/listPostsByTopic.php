@@ -19,7 +19,7 @@ if($posts!=null)
     foreach($posts as $post){
         ?>
         <div class="postContainer">
-            <strong>Par <?=$post->getPseudo()?></strong> le <?=$post->getDatePost()?>
+            <strong>Par <a href="index.php?ctrl=forum&action=user&id=<?=$post->getUser()->getId()?>"><?=$post->getPseudo()?></a></strong> le <?=$post->getDatePost()?>
             <p><?=$post->getText()?></p>
         </div>
         <?php

@@ -14,6 +14,8 @@
         private $registerdate;
         private $banneduntil;
         private $timeBannedRemaining;
+        private $nbTopics;
+        private $nbPosts;
         
 
         public function __construct($data){         
@@ -224,4 +226,44 @@
                         return null;
                 }
             }
+
+        /**
+         * Get the value of nbTopics
+         */ 
+        public function getNbTopics()
+        {
+                return $this->nbTopics;
+        }
+
+        /**
+         * Set the value of nbTopics
+         *
+         * @return  self
+         */ 
+        public function setNbTopics($nbTopics)
+        {
+                $this->nbTopics = $nbTopics;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of nbPosts
+         */ 
+        public function getNbPosts()
+        {
+                return $this->nbPosts;
+        }
+
+        /**
+         * Set the value of nbPosts
+         *
+         * @return  self
+         */ 
+        public function setNbPosts($nbPosts)
+        {
+                $this->nbPosts = $nbPosts;
+
+                return $this;
+        }
     }
