@@ -1,6 +1,5 @@
 <?php
 
-use Model\Managers\TopicManager;
 $topics = $result["data"]['topics'];
 
 ?>
@@ -18,12 +17,9 @@ foreach($topics as $topic ){
                 <div><a href="index.php?ctrl=forum&action=posts&id=<?=$topic->getId()?>"><?=$topic->getTitle()?></a></div>
                 <div><?php echo ($topic->getClosed() ?'<i class="fa-solid fa-lock"></i>' :'<i class="fa-solid fa-lock-open"></i>') ?></div>
             </div>
-            <div><strong>par ... </strong> le <?=$topic->getCreationdate()?></div>
+            <div><strong>par <?= $topic->getPseudo() ?> </strong> le <?=$topic->getCreationdate()?></div>
             <div class="topicNbrPost">
-                <div>Nombre de posts : <?php 
-                $topicManager = new TopicManager(); 
-                echo $topicManager->nbrPostByTopic($topic->getId())["nbrmessage"];;
-                ?>
+                <div>Nombre de posts : <?= $topic->getNbPosts() ?>
                 </div>
                 <div><?php
 

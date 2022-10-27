@@ -10,6 +10,8 @@
         private $user;
         private $creationdate;
         private $closed;
+        private $nbPosts;
+        private $pseudo;
 
         public function __construct($data){         
             $this->hydrate($data);        
@@ -101,6 +103,48 @@
         public function setClosed($closed)
         {
                 $this->closed = $closed;
+
+                return $this;
+        }
+
+
+
+        /**
+         * Get the value of nbPost
+         */ 
+        public function getNbPosts()
+        {
+                return $this->nbPosts;
+        }
+
+        /**
+         * Set the value of nbPost
+         *
+         * @return  self
+         */ 
+        public function setNbPosts($nbPosts)
+        {
+                $this->nbPosts = $nbPosts;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of pseudo
+         */ 
+        public function getPseudo()
+        {
+                return $this->pseudo;
+        }
+
+        /**
+         * Set the value of pseudo
+         *
+         * @return  self
+         */ 
+        public function setPseudo($pseudo)
+        {
+                $this->pseudo = $pseudo;
 
                 return $this;
         }
