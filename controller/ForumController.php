@@ -42,7 +42,7 @@
              return [
                  "view" => VIEW_DIR."forum/listPostsByTopic.php",
                  "data" => [
-                     "posts" => $postManager->findAllById("topic", $id),
+                     "posts" => $postManager->findPostsByTopic($id),
                      "topic" => $topicManager->findOneById($id)
                  ]
              ];

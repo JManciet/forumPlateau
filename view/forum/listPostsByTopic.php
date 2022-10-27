@@ -12,6 +12,7 @@ if($posts!=null)
 
     foreach($posts as $post){
         ?>
+        <strong>Par <?=$post->getPseudo()?></strong> le <?=$post->getDatePost()?>
         <p><?=$post->getText()?></p>
         <?php
     }
