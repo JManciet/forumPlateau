@@ -38,7 +38,7 @@
                             ?>
                             <a href="index.php?ctrl=security&action=profil&id=<?= App\Session::getUser()->getId() ?>"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()->getPseudo()?></a>
                             <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
-                            <a href="index.php?ctrl=forum&action=listTopic">Voir la liste des topics</a>
+                            <a href="index.php?ctrl=forum&action=paginationTopics&id=1">Voir la liste des topics</a>
                             <?php
                         }
                         else{

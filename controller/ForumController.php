@@ -34,6 +34,20 @@
         
         }
 
+        public function paginationTopics($page){
+          
+
+            $topicManager = new TopicManager();
+
+             return [
+                 "view" => VIEW_DIR."forum/listTopics.php",
+                 "data" => [
+                     "res" => $topicManager->findTopicsPagination($page)
+                 ]
+             ];
+         
+         }
+
 
         public function user($id){
           

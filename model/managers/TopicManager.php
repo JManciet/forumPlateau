@@ -16,6 +16,62 @@
         }
 
         
+        public function findTopicsPagination($page, $order =null){
+
+            
+            $page  = (isset($page) && $page < 100000)? (int) $page : 1;
+            $byPage = 5;
+            $start = $byPage * ($page - 1);
+            $total = $this->nbTopics()['nbTopics'];
+            $totalPages = ceil($total / $byPage);
+
+            $next = $page+1;
+            $prev = $page-1;
+
+            $paginatoinInfo = [
+                "page"          => $page,
+                "start"         => $start,
+                "totalPages"    => $totalPages,
+                "next"          => $next,
+                "prev"          => $prev
+            ];
+
+            $orderQuery = ($order) ?                 
+            "ORDER BY ".$order[0]. " ".$order[1] :
+            "";
+
+            $sql = "SELECT id_topic, title, creationdate, closed , t.user_id, COUNT(p.topic_id) AS nbPosts, pseudo
+                    FROM ".$this->tableName." t
+                    LEFT JOIN post p ON t.id_topic = p.topic_id
+                    LEFT JOIN user u ON t.user_id = u.id_user
+                    GROUP BY t.id_topic
+                    ".$orderQuery."
+                    LIMIT ".$start.",".$byPage." ";
+
+
+            $res = [];
+            
+            $res['topics'] = $this->getMultipleResults(
+                DAO::select($sql), 
+                $this->className
+            );
+
+            $res['paginator'] = $paginatoinInfo;
+
+            return $res;
+
+        }
+
+
+        public function nbTopics(){
+
+            $sql = "SELECT COUNT(*) AS nbTopics FROM ".$this->tableName ;
+
+            return DAO::select($sql, null, false);
+
+        }
+
+
         public function findAllTopics($order =null){
 
 
@@ -23,17 +79,17 @@
             "ORDER BY ".$order[0]. " ".$order[1] :
             "";
 
-        $sql = "SELECT id_topic, title, creationdate, closed , t.user_id, COUNT(p.topic_id) AS nbPosts, pseudo
-                FROM ".$this->tableName." t
-                LEFT JOIN post p ON t.id_topic = p.topic_id
-                LEFT JOIN user u ON t.user_id = u.id_user
-                GROUP BY t.id_topic
-                ".$orderQuery;
+            $sql = "SELECT id_topic, title, creationdate, closed , t.user_id, COUNT(p.topic_id) AS nbPosts, pseudo
+                    FROM ".$this->tableName." t
+                    LEFT JOIN post p ON t.id_topic = p.topic_id
+                    LEFT JOIN user u ON t.user_id = u.id_user
+                    GROUP BY t.id_topic
+                    ".$orderQuery;
 
-        return $this->getMultipleResults(
-            DAO::select($sql), 
-            $this->className
-        );
+            return $this->getMultipleResults(
+                DAO::select($sql), 
+                $this->className
+            );
 
         }
 
