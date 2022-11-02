@@ -34,7 +34,7 @@
         
         }
 
-        public function paginationTopics($page){
+        public function paginationTopics(){
           
 
             $topicManager = new TopicManager();
@@ -42,9 +42,26 @@
              return [
                  "view" => VIEW_DIR."forum/listTopics.php",
                  "data" => [
-                     "res" => $topicManager->findTopicsPagination($page)
+                     "res" => $topicManager->findTopicsPagination(["creationdate", "DESC"])
                  ]
              ];
+         
+         }
+
+
+         public function paginationPosts($id){
+          
+
+            $postManager = new PostManager();
+            $topicManager = new TopicManager();
+
+            return [
+                "view" => VIEW_DIR."forum/listPostsByTopic.php",
+                "data" => [
+                    "res" => $postManager->findPostsPagination($id),
+                    "topic" => $topicManager->findOneById($id)
+                ]
+            ];
          
          }
 

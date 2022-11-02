@@ -16,19 +16,20 @@
         }
 
         
-        public function findTopicsPagination($page, $order =null){
+        public function findTopicsPagination($order =null){
 
+            $page = $_GET['page'];
             
             $page  = (isset($page) && $page < 100000)? (int) $page : 1;
             $byPage = 5;
             $start = $byPage * ($page - 1);
-            $total = $this->nbTopics()['nbTopics'];
+            $total = count(iterator_to_array($this->findAll()));
             $totalPages = ceil($total / $byPage);
 
             $next = $page+1;
             $prev = $page-1;
 
-            $paginatoinInfo = [
+            $paginationInfo = [
                 "page"          => $page,
                 "start"         => $start,
                 "totalPages"    => $totalPages,
@@ -56,18 +57,9 @@
                 $this->className
             );
 
-            $res['paginator'] = $paginatoinInfo;
+            $res['paginator'] = $paginationInfo;
 
             return $res;
-
-        }
-
-
-        public function nbTopics(){
-
-            $sql = "SELECT COUNT(*) AS nbTopics FROM ".$this->tableName ;
-
-            return DAO::select($sql, null, false);
 
         }
 
