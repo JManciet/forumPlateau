@@ -137,5 +137,43 @@
         }
 
 
+        public function updatePassword($password,$id){
+
+            $sql = "UPDATE ".$this->tableName."
+                    SET mdp = :password
+                    WHERE id_user = :id";
+
+            
+            return DAO::update($sql, ['password' => $password,
+                                      'id' => $id]); 
+        
+        }
+
+
+        public function updatePseudo($pseudo,$id){
+
+            $sql = "UPDATE ".$this->tableName."
+                    SET pseudo = :pseudo
+                    WHERE id_user = :id";
+
+            
+            return DAO::update($sql, ['pseudo' => $pseudo,
+                                      'id' => $id]); 
+        
+        }
+
+        public function updateEmail($email,$id){
+
+            $sql = "UPDATE ".$this->tableName."
+                    SET email = :email
+                    WHERE id_user = :id";
+
+            
+            return DAO::update($sql, ['email' => $email,
+                                      'id' => $id]); 
+        
+        }
+
+
     }
 

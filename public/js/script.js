@@ -6,3 +6,14 @@ function togg(id){
     form.style.display = "block";
   }
 };
+
+function addInput(submitButton, textArea){
+  let submit = document.getElementById(submitButton);
+  var content = document.getElementById(textArea).value;
+  
+  if(content == ""){
+    submit.style.display = "none";
+  } else {
+    submit.style.display = "block";
+  }
+}

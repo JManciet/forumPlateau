@@ -215,6 +215,7 @@
 
         public function profil($id){
           
+            if(Session::getUser()->getId() == $id){
             $userManager = new UserManager();
  
              return [
@@ -223,8 +224,161 @@
                      "user" => $userManager->findOneById($id)
                  ]
              ];
+
+            }else{
+
+                Session::addFlash('error', 'Vous n\'ete pas autorisé à voir ce profil !');
+                return [
+                    "view" => VIEW_DIR."home.php"
+                ];
+            }
          
          }
+
+
+         public function changePassword($id){
+
+
+            if(isset($_POST['submit']) && Session::getUser()->getId() == $id) {
+
+                $currentPassword = filter_input(INPUT_POST, "current_password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $newPassword = filter_input(INPUT_POST, "new_password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $confirmPassword = filter_input(INPUT_POST, "confirm_password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if($currentPassword && $newPassword && $confirmPassword) {
+
+                    $userManager = new UserManager();
+                    $user = $userManager->findUser($id);
+                    $hashPassword = $user->getMdp();
+
+
+                    if($newPassword == $confirmPassword) {
+                        $passwordLength = strlen($newPassword);
+                        if($passwordLength >= 8) {
+                            if(password_verify($currentPassword, $hashPassword)){
+                                $hashPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                                if($userManager->updatePassword( $hashPassword, $id)){
+
+                                    Session::getUser()->setMdp( $hashPassword);
+                                    Session::addFlash('success', 'Mots de passe mis à jour !');
+                                } else
+                                    Session::addFlash('error', 'Problème lors de la mise à jour du mots de passe !');
+
+                            } else {
+                                Session::addFlash('error', 'Mauvais mot de passe !');
+                            }
+                        } else {
+                            Session::addFlash('error', 'Vos mots de passe doit faire minimum 8 caractères !');
+                        }
+                    } else {
+                        Session::addFlash('error', 'Vos mots de passes ne correspondent pas !');
+                    }
+                    
+                 } else {
+                    Session::addFlash('error', 'Tous les champs doivent être complétés !');
+                 }
+                $this->redirectTo("security","profil",$id);
+            }else{
+                
+
+                return [
+                    "view" => VIEW_DIR."security/viewAccount.php"
+                ];
+
+
+            }
+            
+        }
+
+        public function changePseudo($id){
+
+
+            if(isset($_POST['submit']) && Session::getUser()->getId() == $id) {
+
+                $pseudo = filter_input(INPUT_POST, "pseudo", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if($pseudo) {
+                    $pseudoLength = strlen($pseudo);
+                    if($pseudoLength <= 50) {
+                        $userManager = new UserManager();
+                        $reqPseudo = $userManager->findPseudo($pseudo);
+                        if($reqPseudo == null) {
+                    
+
+                            if($userManager->updatePseudo($pseudo, $id)){
+                                Session::getUser()->setPseudo($pseudo);
+                                Session::addFlash('success', 'Votre pseudo à bien été mise à jour !');
+                            } else
+                                Session::addFlash('error', 'Problème lors de la mise à jour du pseudo !');
+
+                        } else {
+                            Session::addFlash('error', 'Votre pseudo est déjà utilisée !');
+                        }
+                    } else {
+                      Session::addFlash('error', 'Votre pseudo ne doit pas dépasser 50 caractères !');
+                    }
+                } else {
+                    Session::addFlash('error', 'Tous les champs doivent être complétés !');
+                }
+                $this->redirectTo("security","profil",$id);
+            }else{
+                
+
+                return [
+                    "view" => VIEW_DIR."security/viewAccount.php"
+                ];
+
+
+            }
+            
+        }
+
+
+        public function changeEmail($id){
+
+
+            if(isset($_POST['submit']) && Session::getUser()->getId() == $id) {
+
+                $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if($email) {
+
+                    if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        $userManager = new UserManager();
+                        $reqEmail = $userManager->findEmail($email);
+                        if($reqEmail == null) {
+                    
+
+                            if($userManager->updateEmail($email, $id)){
+                                Session::getUser()->setEmail($email);
+                                Session::addFlash('success', 'Votre email à bien été mise à jour !');
+                            } else
+                                Session::addFlash('error', 'Problème lors de la mise à jour de votre email !');
+
+
+                        } else {
+                            Session::addFlash('error', 'Cet email est déjà utilisée !');
+                        }
+
+                    } else {
+                        Session::addFlash('error', 'Votre adresse mail n\'est pas valide !'); 
+                    }
+
+                } else {
+                    Session::addFlash('error', 'Tous les champs doivent être complétés !');
+                }
+                $this->redirectTo("security","profil",$id);
+            }else{
+                
+
+                return [
+                    "view" => VIEW_DIR."security/viewAccount.php"
+                ];
+
+
+            }
+            
+        }
 
 
     }

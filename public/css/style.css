@@ -41,7 +41,7 @@ a{
     color: red;
 }
 
-.formAddBan{
+.formAddBan , .formChangePassword, #submitPseudo, #submitEmail{
     display: none;
 }
 
